@@ -17,4 +17,18 @@ const colors = {
   },
 };
 
-export default extendTheme({ colors });
+export default extendTheme({
+  colors,
+  styles: {
+    global: {
+      "html, body": {
+        background: "initial",
+        padding: 0,
+        margin: 0,
+        fontFeatureSettings: `'zero' 1`,
+        scrollBehavior: "smooth",
+        borderColor: "gray.200",
+      },
+    },
+  },
+});
