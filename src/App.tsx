@@ -59,9 +59,7 @@ function App() {
         </Box>
       ) : null}
       <Box as="main" flexGrow={1} py={2}>
-        <Container maxW="container.lg">
-          <Outlet />
-        </Container>
+        <Container maxW="container.lg">{address && <Outlet />}</Container>
       </Box>
       <Footer />
     </Flex>

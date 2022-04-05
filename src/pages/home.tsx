@@ -8,10 +8,12 @@ import {
   Spinner,
   Image,
   Skeleton,
+  Box,
 } from "@chakra-ui/react";
 import { useAddress, useSDK } from "@thirdweb-dev/react";
 import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
+import { CollectionMetadata } from "../components/CollectionMetadata";
 
 function useAllCollections(address?: string) {
   const sdk = useSDK();
@@ -60,14 +62,25 @@ export const HomePage: React.FC = () => {
           ) : (
             <Flex direction="column" gap={2}>
               {nftCollectionQuery.data.map((collection) => (
-                <CollectionRow
-                  address={collection.address}
-                  getterFn={collection.metadata}
-                />
+                <Box
+                  borderRadius="md"
+                  as={Link}
+                  _hover={{
+                    bg: "gray.100",
+                    cursor: "pointer",
+                  }}
+                  to={collection.address}
+                  key={collection.address}
+                >
+                  <CollectionMetadata
+                    address={collection.address}
+                    getterFn={collection.metadata}
+                  />
+                </Box>
               ))}
             </Flex>
           )}
-          <Divider />
+          <Divider borderColor="gray.200" />
           <Center py={4}>
             <Button to="create" as={Link} size="md" colorScheme="brand">
               Create new collection
@@ -76,61 +89,5 @@ export const HomePage: React.FC = () => {
         </Flex>
       )}
     </Flex>
-  );
-};
-
-export function useContractMetadataWithAddress(
-  address: string,
-  queryFn: () => Promise<{ name: string; description?: string; image?: string }>
-) {
-  return useQuery(["collection", "metadata", address], () => queryFn(), {
-    enabled: !!address && typeof queryFn === "function",
-  });
-}
-
-const CollectionRow: React.VFC<{
-  getterFn: () => Promise<{
-    name: string;
-    description?: string;
-    image?: string;
-  }>;
-  address: string;
-}> = ({ getterFn, address }) => {
-  const metadataQuery = useContractMetadataWithAddress(address, getterFn);
-
-  return (
-    <Link to={address}>
-      <Flex
-        p={1}
-        direction="row"
-        gap={4}
-        borderRadius="md"
-        _hover={{ bg: "gray.100", cursor: "pointer" }}
-      >
-        <Skeleton
-          overflow="hidden"
-          borderRadius="md"
-          isLoaded={metadataQuery.isSuccess}
-        >
-          <Image
-            objectFit="contain"
-            bg="gray.200"
-            src={metadataQuery.data?.image}
-            alt={metadataQuery.data?.name}
-            boxSize={24}
-          />
-        </Skeleton>
-        <Flex direction="column" gap={2}>
-          <Skeleton isLoaded={metadataQuery.isSuccess}>
-            <Heading size="sm">{metadataQuery.data?.name || "loading"}</Heading>
-          </Skeleton>
-          <Skeleton isLoaded={metadataQuery.isSuccess}>
-            <Text fontSize="sm" isTruncated noOfLines={3}>
-              {metadataQuery.data?.description || "description loading"}
-            </Text>
-          </Skeleton>
-        </Flex>
-      </Flex>
-    </Link>
   );
 };
