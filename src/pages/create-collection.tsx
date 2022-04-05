@@ -40,7 +40,10 @@ function useDeployCollectionMutation() {
     },
     {
       onSuccess: () => {
-        return queryClient.refetchQueries(["collections"]);
+        return Promise.all([
+          queryClient.invalidateQueries(["collections"]),
+          queryClient.refetchQueries(["collections"]),
+        ]);
       },
     }
   );

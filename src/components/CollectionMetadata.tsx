@@ -44,7 +44,7 @@ export const CollectionMetadata: React.VFC<{
           <Heading size="sm">{metadataQuery.data?.name || "loading"}</Heading>
         </Skeleton>
         <Skeleton isLoaded={metadataQuery.isSuccess}>
-          {metadataQuery.data?.description && (
+          {(metadataQuery.data?.description || metadataQuery.isLoading) && (
             <Text fontSize="sm" isTruncated noOfLines={3}>
               {metadataQuery.data?.description || "description loading"}
             </Text>
