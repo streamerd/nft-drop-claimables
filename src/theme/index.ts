@@ -22,7 +22,6 @@ export default extendTheme({
   styles: {
     global: {
       "html, body": {
-        background: "initial",
         padding: 0,
         margin: 0,
         fontFeatureSettings: `'zero' 1`,
