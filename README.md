@@ -1,3 +1,7 @@
+## Run this example right now
+
+[Code Sandbox](https://codesandbox.io/s/github/thirdweb-example/nft-collection-vite-ts?file=/src/App.tsx)
+
 ## Getting Started
 
 First, intall the required dependencies:
