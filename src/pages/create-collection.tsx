@@ -82,7 +82,7 @@ export const CreateCollectionPage: React.FC = () => {
       <Heading textAlign="center" fontWeight={500} size="sm">
         Create Collection
       </Heading>
-      <Divider borderColor="gray.200" />
+      <Divider />
       <SimpleGrid placeItems="center" columns={{ base: 1, md: 2 }} gap={4}>
         <FormControl maxW="300px">
           <AspectRatio ratio={1} w="100%">
@@ -95,7 +95,6 @@ export const CreateCollectionPage: React.FC = () => {
               backgroundRepeat="no-repeat"
               backgroundSize="contain"
               borderWidth={1}
-              borderColor="gray.200"
             >
               <input {...getInputProps()} />
               {!imageUrl && (
@@ -113,7 +112,6 @@ export const CreateCollectionPage: React.FC = () => {
             </FormLabel>
             <Input
               borderWidth={1}
-              borderColor="gray.200"
               value={name}
               onChange={(e) => setName(e.currentTarget.value)}
               variant="filled"
@@ -125,7 +123,6 @@ export const CreateCollectionPage: React.FC = () => {
             </FormLabel>
             <Textarea
               borderWidth={1}
-              borderColor="gray.200"
               value={description}
               onChange={(e) => setDesctiption(e.currentTarget.value)}
               variant="filled"
@@ -133,7 +130,7 @@ export const CreateCollectionPage: React.FC = () => {
           </FormControl>
         </Flex>
       </SimpleGrid>
-      <Divider borderColor="gray.200" />
+      <Divider />
       <MismatchButton
         type="submit"
         isLoading={deployMutation.isLoading}

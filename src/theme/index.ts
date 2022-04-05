@@ -28,6 +28,9 @@ export default extendTheme({
         scrollBehavior: "smooth",
         borderColor: "gray.200",
       },
+      "*": {
+        borderColor: "var(--chakra-colors-gray-200)",
+      },
     },
   },
 });

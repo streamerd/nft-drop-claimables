@@ -50,7 +50,7 @@ export const CollectionPage: React.FC = () => {
           Mint new NFT
         </Button>
       </Flex>
-      <Divider borderColor="gray.200" />
+      <Divider />
       {itemsQuery.isLoading ? (
         <Center py={4} w="100%">
           <Flex gap={2} align="center">

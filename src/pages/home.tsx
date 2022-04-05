@@ -80,7 +80,7 @@ export const HomePage: React.FC = () => {
               ))}
             </Flex>
           )}
-          <Divider borderColor="gray.200" />
+          <Divider />
           <Center py={4}>
             <Button to="create" as={Link} size="md" colorScheme="brand">
               Create new collection

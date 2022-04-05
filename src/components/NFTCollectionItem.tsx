@@ -22,7 +22,6 @@ export const NftCollectionItem: React.VFC<{ item: NFTMetadataOwner }> = ({
       w="100%"
       borderRadius="md"
       borderWidth={1}
-      borderColor="gray.200"
       p={2}
       gap={2}
     >
@@ -40,7 +39,7 @@ export const NftCollectionItem: React.VFC<{ item: NFTMetadataOwner }> = ({
       <Text fontSize="sm" noOfLines={3}>
         {item.metadata.description}
       </Text>
-      <Divider mt="auto" borderColor="gray.200" />
+      <Divider mt="auto" />
       <ButtonGroup w="full" colorScheme="brand" size="sm">
         <Button variant="ghost">Transfer</Button>
         <Button flexGrow={1}>Sell</Button>
