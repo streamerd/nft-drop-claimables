@@ -37,7 +37,7 @@ root.render(
                   path="/:collectionAddress"
                   element={<CollectionOverviewPage />}
                 >
-                  <Route index element={CollectionPage} />
+                  <Route index element={<CollectionPage />} />
                   <Route
                     path="/:collectionAddress/mint"
                     element={<MintPage />}

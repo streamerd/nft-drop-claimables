@@ -10,7 +10,6 @@ import {
   SimpleGrid,
   Textarea,
   Text,
-  Button,
 } from "@chakra-ui/react";
 import { useAddress, useSDK } from "@thirdweb-dev/react";
 import { useState } from "react";
