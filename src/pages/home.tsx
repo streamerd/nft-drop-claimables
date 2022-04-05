@@ -14,6 +14,7 @@ import { useAddress, useSDK } from "@thirdweb-dev/react";
 import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
 import { CollectionMetadata } from "../components/CollectionMetadata";
+import { ExplainButton } from "../demo-layer/Provider";
 
 function useAllCollections(address?: string) {
   const sdk = useSDK();
@@ -37,6 +38,7 @@ export const HomePage: React.FC = () => {
     <Flex direction={"column"} gap={2} flexGrow={1}>
       <Heading textAlign="center" fontWeight={500} size="sm">
         Your collections
+        <ExplainButton explainId="get-collections" />
       </Heading>
       {!address ? (
         <Center py={4} w="100%">

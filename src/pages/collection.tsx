@@ -13,6 +13,7 @@ import { useQuery } from "react-query";
 import { Link, useParams } from "react-router-dom";
 import { CollectionMetadata } from "../components/CollectionMetadata";
 import { NftCollectionItem } from "../components/NFTCollectionItem";
+import { ExplainButton } from "../demo-layer/Provider";
 
 function useCollectionItems(collection?: NFTCollection) {
   return useQuery(
@@ -67,11 +68,17 @@ export const CollectionPage: React.FC = () => {
           </Heading>
         </Center>
       ) : (
-        <SimpleGrid gap={4} columns={{ base: 2, sm: 3, md: 4, lg: 5 }}>
-          {itemsQuery.data?.map((item) => (
-            <NftCollectionItem key={item.metadata.id.toString()} item={item} />
-          ))}
-        </SimpleGrid>
+        <Flex direction="column" gap={2}>
+          <ExplainButton explainId="get-collection-items" />
+          <SimpleGrid gap={4} columns={{ base: 2, sm: 3, md: 4, lg: 5 }}>
+            {itemsQuery.data?.map((item) => (
+              <NftCollectionItem
+                key={item.metadata.id.toString()}
+                item={item}
+              />
+            ))}
+          </SimpleGrid>
+        </Flex>
       )}
     </Flex>
   );

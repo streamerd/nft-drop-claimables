@@ -10,6 +10,8 @@ import {
   SimpleGrid,
   Textarea,
   Text,
+  ButtonGroup,
+  Box,
 } from "@chakra-ui/react";
 import { useAddress, useNFTCollection, useSDK } from "@thirdweb-dev/react";
 import { useState } from "react";
@@ -17,6 +19,7 @@ import { useDropzone } from "react-dropzone";
 import { useMutation } from "react-query";
 import { useNavigate, useParams } from "react-router-dom";
 import { MismatchButton } from "../components/mismatch-button";
+import { ExplainButton } from "../demo-layer/Provider";
 import { useImageFileOrUrl } from "../hooks/useFileOrUrl";
 import { queryClient } from "../queryClient";
 
@@ -133,15 +136,20 @@ export const MintPage: React.FC = () => {
         </Flex>
       </SimpleGrid>
       <Divider />
-      <MismatchButton
-        type="submit"
-        isLoading={deployMutation.isLoading}
-        loadingText="Minting NFT"
-        isDisabled={!address}
-        colorScheme="brand"
-      >
-        Mint
-      </MismatchButton>
+
+      <ButtonGroup>
+        <MismatchButton
+          type="submit"
+          isLoading={deployMutation.isLoading}
+          loadingText="Minting NFT"
+          isDisabled={!address}
+          colorScheme="brand"
+        >
+          Mint
+        </MismatchButton>
+
+        <ExplainButton explainId="mint" />
+      </ButtonGroup>
     </Flex>
   );
 };

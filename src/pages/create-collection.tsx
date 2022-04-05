@@ -10,6 +10,7 @@ import {
   SimpleGrid,
   Textarea,
   Text,
+  ButtonGroup,
 } from "@chakra-ui/react";
 import { useAddress, useSDK } from "@thirdweb-dev/react";
 import { useState } from "react";
@@ -17,6 +18,7 @@ import { useDropzone } from "react-dropzone";
 import { useMutation } from "react-query";
 import { useNavigate } from "react-router-dom";
 import { MismatchButton } from "../components/mismatch-button";
+import { ExplainButton } from "../demo-layer/Provider";
 import { useImageFileOrUrl } from "../hooks/useFileOrUrl";
 import { queryClient } from "../queryClient";
 
@@ -131,15 +133,18 @@ export const CreateCollectionPage: React.FC = () => {
         </Flex>
       </SimpleGrid>
       <Divider />
-      <MismatchButton
-        type="submit"
-        isLoading={deployMutation.isLoading}
-        loadingText="Creating Collection"
-        isDisabled={!address}
-        colorScheme="brand"
-      >
-        Create
-      </MismatchButton>
+      <ButtonGroup>
+        <MismatchButton
+          type="submit"
+          isLoading={deployMutation.isLoading}
+          loadingText="Creating Collection"
+          isDisabled={!address}
+          colorScheme="brand"
+        >
+          Create
+        </MismatchButton>
+        <ExplainButton explainId="create-collection" />
+      </ButtonGroup>
     </Flex>
   );
 };
