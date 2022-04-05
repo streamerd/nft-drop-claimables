@@ -26,10 +26,10 @@ export default extendTheme({
         margin: 0,
         fontFeatureSettings: `'zero' 1`,
         scrollBehavior: "smooth",
-        borderColor: "gray.200",
+        borderColor: "#E2E8F0",
       },
       "*": {
-        borderColor: "var(--chakra-colors-gray-200)",
+        borderColor: "#E2E8F0",
       },
     },
   },
