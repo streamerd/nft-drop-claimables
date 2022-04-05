@@ -19,18 +19,4 @@ const colors = {
 
 export default extendTheme({
   colors,
-  styles: {
-    global: {
-      "html, body": {
-        padding: 0,
-        margin: 0,
-        fontFeatureSettings: `'zero' 1`,
-        scrollBehavior: "smooth",
-        borderColor: "#E2E8F0",
-      },
-      "*": {
-        borderColor: "#E2E8F0",
-      },
-    },
-  },
 });

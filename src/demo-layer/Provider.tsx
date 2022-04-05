@@ -1,19 +1,14 @@
 import { QuestionOutlineIcon } from "@chakra-ui/icons";
 import {
-  Button,
-  Code,
   Drawer,
   DrawerBody,
   DrawerCloseButton,
   DrawerContent,
-  DrawerFooter,
   DrawerHeader,
   DrawerOverlay,
   Heading,
   IconButton,
-  Input,
   Link,
-  List,
   ListItem,
   UnorderedList,
 } from "@chakra-ui/react";
