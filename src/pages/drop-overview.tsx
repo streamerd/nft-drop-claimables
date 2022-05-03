@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
 
-export const CollectionOverviewPage: React.FC = () => {
+export const DropOverviewPage: React.FC = () => {
   return <Outlet />;
 };

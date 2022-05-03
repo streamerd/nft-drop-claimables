@@ -13,36 +13,35 @@ import {
   ButtonGroup,
   Box,
 } from "@chakra-ui/react";
-import { useAddress, useNFTCollection, useSDK } from "@thirdweb-dev/react";
+import { useAddress, useNFTDrop } from "@thirdweb-dev/react";
 import { useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { useMutation } from "react-query";
 import { useNavigate, useParams } from "react-router-dom";
 import { MismatchButton } from "../components/mismatch-button";
-import { ExplainButton } from "../demo-layer/Provider";
 import { useImageFileOrUrl } from "../hooks/useFileOrUrl";
 import { queryClient } from "../queryClient";
 
 function useMintNFTMutation() {
   const address = useAddress();
   const params = useParams();
-  const collectionAddress = params.collectionAddress;
-  const collection = useNFTCollection(collectionAddress);
+  const dropAddress = params.dropAddress;
+  const nftDrop = useNFTDrop(dropAddress);
   return useMutation(
     async (data: { name: string; description?: string; image?: File }) => {
-      if (!collection) {
-        throw new Error("no collection ready");
+      if (!nftDrop) {
+        throw new Error("no nftDrop ready");
       }
       if (!address) {
         throw new Error("wallet not connected");
       }
-      return await collection.mintToSelf({ ...data });
+      return await nftDrop.createBatch([{ ...data }]);
     },
     {
       onSuccess: () => {
         return Promise.all([
-          queryClient.invalidateQueries(["collection", collectionAddress]),
-          queryClient.refetchQueries(["collection", collectionAddress]),
+          queryClient.invalidateQueries(["drop", dropAddress]),
+          queryClient.refetchQueries(["drop", dropAddress]),
         ]);
       },
     }
@@ -85,7 +84,7 @@ export const MintPage: React.FC = () => {
       flexGrow={1}
     >
       <Heading textAlign="center" fontWeight={500} size="sm">
-        Mint NFT
+        Create Drop
       </Heading>
       <Divider />
       <SimpleGrid placeItems="center" columns={{ base: 1, md: 2 }} gap={4}>
@@ -141,14 +140,12 @@ export const MintPage: React.FC = () => {
         <MismatchButton
           type="submit"
           isLoading={deployMutation.isLoading}
-          loadingText="Minting NFT"
+          loadingText="Creating Drop"
           isDisabled={!address}
           colorScheme="brand"
         >
-          Mint
+          Create Drop
         </MismatchButton>
-
-        <ExplainButton explainId="mint" />
       </ButtonGroup>
     </Flex>
   );

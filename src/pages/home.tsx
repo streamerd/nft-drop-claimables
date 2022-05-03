@@ -13,18 +13,17 @@ import {
 import { useAddress, useSDK } from "@thirdweb-dev/react";
 import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
-import { CollectionMetadata } from "../components/CollectionMetadata";
-import { ExplainButton } from "../demo-layer/Provider";
+import { ContractMetadata } from "../components/ContractMetadata";
 
-function useAllCollections(address?: string) {
+function useAllDrops(address?: string) {
   const sdk = useSDK();
-  return useQuery(["collections", address], async () => {
+  return useQuery(["drops", address], async () => {
     if (!address) {
       return [];
     }
     return (
       (await sdk?.getContractList(address))?.filter(
-        (c) => c.contractType === "nft-collection"
+        (c) => c.contractType === "nft-drop"
       ) || []
     );
   });
@@ -32,19 +31,18 @@ function useAllCollections(address?: string) {
 
 export const HomePage: React.FC = () => {
   const address = useAddress();
-  const nftCollectionQuery = useAllCollections(address);
+  const nftDropQuery = useAllDrops(address);
 
   return (
     <Flex direction={"column"} gap={2} flexGrow={1}>
       <Heading textAlign="center" fontWeight={500} size="sm">
-        Your collections
-        <ExplainButton explainId="get-collections" />
+        Your NFT drops
       </Heading>
       {!address ? (
         <Center py={4} w="100%">
           <Text>¯\_(ツ)_/¯</Text>
         </Center>
-      ) : nftCollectionQuery.isLoading ? (
+      ) : nftDropQuery.isLoading ? (
         <Center py={4} w="100%">
           <Flex gap={2} align="center">
             <Spinner size="sm" />
@@ -55,15 +53,15 @@ export const HomePage: React.FC = () => {
         </Center>
       ) : (
         <Flex direction="column" gap={2}>
-          {!nftCollectionQuery.data?.length ? (
+          {!nftDropQuery.data?.length ? (
             <Center py={4} w="100%">
               <Heading fontWeight="300" size="xs" fontStyle="italic">
-                You have not created any collections yet.
+                You have not created any NFT drops yet.
               </Heading>
             </Center>
           ) : (
             <Flex direction="column" gap={2}>
-              {nftCollectionQuery.data.map((collection) => (
+              {nftDropQuery.data.map((nftDrop) => (
                 <Box
                   borderRadius="md"
                   as={Link}
@@ -71,12 +69,12 @@ export const HomePage: React.FC = () => {
                     bg: "gray.100",
                     cursor: "pointer",
                   }}
-                  to={collection.address}
-                  key={collection.address}
+                  to={nftDrop.address}
+                  key={nftDrop.address}
                 >
-                  <CollectionMetadata
-                    address={collection.address}
-                    getterFn={collection.metadata}
+                  <ContractMetadata
+                    address={nftDrop.address}
+                    getterFn={nftDrop.metadata}
                   />
                 </Box>
               ))}
@@ -85,7 +83,7 @@ export const HomePage: React.FC = () => {
           <Divider />
           <Center py={4}>
             <Button to="create" as={Link} size="md" colorScheme="brand">
-              Create new collection
+              Create new NFT drop
             </Button>
           </Center>
         </Flex>

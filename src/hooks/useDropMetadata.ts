@@ -1,6 +1,6 @@
 import { useQuery } from "react-query";
 
-export function useCollectionMetadata(
+export function useDropMetadata(
   address?: string,
   queryFn?: () => Promise<
     | {
@@ -12,7 +12,7 @@ export function useCollectionMetadata(
   >
 ) {
   return useQuery(
-    ["collection", "metadata", address],
+    ["drop", "metadata", address],
     async () => {
       if (queryFn) {
         return await queryFn();

@@ -18,11 +18,10 @@ import { useDropzone } from "react-dropzone";
 import { useMutation } from "react-query";
 import { useNavigate } from "react-router-dom";
 import { MismatchButton } from "../components/mismatch-button";
-import { ExplainButton } from "../demo-layer/Provider";
 import { useImageFileOrUrl } from "../hooks/useFileOrUrl";
 import { queryClient } from "../queryClient";
 
-function useDeployCollectionMutation() {
+function useDeployDropMutation() {
   const address = useAddress();
   const sdk = useSDK();
   return useMutation(
@@ -33,7 +32,7 @@ function useDeployCollectionMutation() {
       if (!address) {
         throw new Error("wallet not connected");
       }
-      return await sdk.deployer.deployNFTCollection({
+      return await sdk.deployer.deployNFTDrop({
         ...data,
         primary_sale_recipient: address,
       });
@@ -41,15 +40,15 @@ function useDeployCollectionMutation() {
     {
       onSuccess: () => {
         return Promise.all([
-          queryClient.invalidateQueries(["collections"]),
-          queryClient.refetchQueries(["collections"]),
+          queryClient.invalidateQueries(["drops"]),
+          queryClient.refetchQueries(["drops"]),
         ]);
       },
     }
   );
 }
 
-export const CreateCollectionPage: React.FC = () => {
+export const CreateDropPage: React.FC = () => {
   const address = useAddress();
   const [image, setImage] = useState<File>();
   const [name, setName] = useState("");
@@ -62,7 +61,7 @@ export const CreateCollectionPage: React.FC = () => {
 
   const imageUrl = useImageFileOrUrl(image);
 
-  const deployMutation = useDeployCollectionMutation();
+  const deployMutation = useDeployDropMutation();
   const navigate = useNavigate();
 
   return (
@@ -85,7 +84,7 @@ export const CreateCollectionPage: React.FC = () => {
       flexGrow={1}
     >
       <Heading textAlign="center" fontWeight={500} size="sm">
-        Create Collection
+        Create Drop
       </Heading>
       <Divider />
       <SimpleGrid placeItems="center" columns={{ base: 1, md: 2 }} gap={4}>
@@ -140,13 +139,12 @@ export const CreateCollectionPage: React.FC = () => {
         <MismatchButton
           type="submit"
           isLoading={deployMutation.isLoading}
-          loadingText="Creating Collection"
+          loadingText="Creating Drop..."
           isDisabled={!address}
           colorScheme="brand"
         >
           Create
         </MismatchButton>
-        <ExplainButton explainId="create-collection" />
       </ButtonGroup>
     </Flex>
   );

@@ -1,7 +1,7 @@
 import { Flex, Heading, Skeleton, Image, Text } from "@chakra-ui/react";
-import { useCollectionMetadata } from "../hooks/useCollectionMetadata";
+import { useDropMetadata } from "../hooks/useDropMetadata";
 
-export const CollectionMetadata: React.VFC<{
+export const ContractMetadata: React.VFC<{
   getterFn?: () => Promise<
     | {
         name?: string;
@@ -12,7 +12,7 @@ export const CollectionMetadata: React.VFC<{
   >;
   address?: string;
 }> = ({ getterFn, address }) => {
-  const metadataQuery = useCollectionMetadata(address, getterFn);
+  const metadataQuery = useDropMetadata(address, getterFn);
 
   return (
     <Flex

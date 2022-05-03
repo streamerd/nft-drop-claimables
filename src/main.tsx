@@ -11,13 +11,12 @@ if (!globalThis.Buffer) {
 }
 
 import chakraTheme from "./theme";
-import { CreateCollectionPage } from "./pages/create-collection";
-import { CollectionPage } from "./pages/collection";
+import { CreateDropPage } from "./pages/create-drop";
+import { DropPage } from "./pages/drop";
 import { MintPage } from "./pages/mint-nft";
-import { CollectionOverviewPage } from "./pages/collection-overview";
+import { DropOverviewPage } from "./pages/drop-overview";
 import { QueryClientProvider } from "react-query";
 import { queryClient } from "./queryClient";
-import { DemoProvider } from "./demo-layer/Provider";
 
 // This is the chainId your dApp will work on.
 export const activeChainId = ChainId.Polygon;
@@ -28,31 +27,23 @@ root.render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
       <ChakraProvider theme={chakraTheme}>
-        <DemoProvider>
-          <ThirdwebProvider
-            desiredChainId={activeChainId}
-            queryClient={queryClient}
-          >
-            <BrowserRouter>
-              <Routes>
-                <Route path="/" element={<App />}>
-                  <Route index element={<HomePage />} />
-                  <Route path="/create" element={<CreateCollectionPage />} />
-                  <Route
-                    path="/:collectionAddress"
-                    element={<CollectionOverviewPage />}
-                  >
-                    <Route index element={<CollectionPage />} />
-                    <Route
-                      path="/:collectionAddress/mint"
-                      element={<MintPage />}
-                    />
-                  </Route>
+        <ThirdwebProvider
+          desiredChainId={activeChainId}
+          queryClient={queryClient}
+        >
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<App />}>
+                <Route index element={<HomePage />} />
+                <Route path="/create" element={<CreateDropPage />} />
+                <Route path="/:dropAddress" element={<DropOverviewPage />}>
+                  <Route index element={<DropPage />} />
+                  <Route path="/:dropAddress/mint" element={<MintPage />} />
                 </Route>
-              </Routes>
-            </BrowserRouter>
-          </ThirdwebProvider>
-        </DemoProvider>
+              </Route>
+            </Routes>
+          </BrowserRouter>
+        </ThirdwebProvider>
       </ChakraProvider>
     </QueryClientProvider>
   </React.StrictMode>
