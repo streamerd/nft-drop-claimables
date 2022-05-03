@@ -36,7 +36,7 @@ function useMintNFTMutation() {
       if (!address) {
         throw new Error("wallet not connected");
       }
-      return await collection.mint({ ...data });
+      return await collection.mintToSelf({ ...data });
     },
     {
       onSuccess: () => {

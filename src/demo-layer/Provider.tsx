@@ -12,7 +12,7 @@ import {
   ListItem,
   UnorderedList,
 } from "@chakra-ui/react";
-import { createContext, useContext, useMemo, useState } from "react";
+import React, { createContext, useContext, useMemo, useState } from "react";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import { docco } from "react-syntax-highlighter/dist/esm/styles/hljs";
 
@@ -75,7 +75,9 @@ const DemoContext = createContext({
   setExplainId: (id: ExplainId) => undefined as void,
 });
 
-export const DemoProvider: React.FC = ({ children }) => {
+export const DemoProvider: React.FC<React.PropsWithChildren<{}>> = ({
+  children,
+}) => {
   const [explainId, setExplainId] = useState<ExplainId | undefined>(undefined);
 
   const data = useMemo(() => {

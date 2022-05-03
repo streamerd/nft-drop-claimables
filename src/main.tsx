@@ -29,7 +29,10 @@ root.render(
     <QueryClientProvider client={queryClient}>
       <ChakraProvider theme={chakraTheme}>
         <DemoProvider>
-          <ThirdwebProvider desiredChainId={activeChainId}>
+          <ThirdwebProvider
+            desiredChainId={activeChainId}
+            queryClient={queryClient}
+          >
             <BrowserRouter>
               <Routes>
                 <Route path="/" element={<App />}>
