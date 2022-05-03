@@ -19,7 +19,7 @@ import { QueryClientProvider } from "react-query";
 import { queryClient } from "./queryClient";
 
 // This is the chainId your dApp will work on.
-export const activeChainId = ChainId.Mumbai;
+export const activeChainId = ChainId.Polygon;
 
 const element = document.getElementById("root") as HTMLElement;
 const root = createRoot(element);
