@@ -84,7 +84,7 @@ export const CreateDropPage: React.FC = () => {
       flexGrow={1}
     >
       <Heading textAlign="center" fontWeight={500} size="sm">
-        Create Drop
+        Create Drop Contract
       </Heading>
       <Divider />
       <SimpleGrid placeItems="center" columns={{ base: 1, md: 2 }} gap={4}>

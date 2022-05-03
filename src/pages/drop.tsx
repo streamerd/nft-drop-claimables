@@ -64,6 +64,13 @@ export const DropPage: React.FC = () => {
     return await drop.claimConditions.set([{ price }]);
   });
 
+  const claim = useMutation(async () => {
+    if (!drop) {
+      throw new Error("no item ready");
+    }
+    return await drop.claim(1);
+  });
+
   return (
     <Flex direction="column" gap={2}>
       <Flex direction="row" gap={2} align="center">
@@ -112,7 +119,19 @@ export const DropPage: React.FC = () => {
         </Button>
       </Flex>
       <Divider my={8} />
-      <Heading>Available Drops</Heading>
+      <Flex direction="row" align="center">
+        <Heading flexGrow={3}>Available Drops</Heading>
+        <Button
+          onClick={() => claim.mutate()}
+          isLoading={claim.isLoading}
+          variant="solid"
+          colorScheme="brand"
+          flexGrow={1}
+        >
+          Claim One
+        </Button>
+      </Flex>
+
       {lazyItemsQuery.isLoading ? (
         <Center py={4} w="100%">
           <Flex gap={2} align="center">
@@ -135,7 +154,6 @@ export const DropPage: React.FC = () => {
               <NftDropItem
                 key={item.id.toString()}
                 item={{ owner: "", metadata: item }}
-                canBeClaimed
               />
             ))}
           </SimpleGrid>
@@ -162,7 +180,11 @@ export const DropPage: React.FC = () => {
         <Flex direction="column" gap={2}>
           <SimpleGrid gap={4} columns={{ base: 2, sm: 3, md: 4, lg: 5 }}>
             {claimedItemsQuery.data?.map((item) => (
-              <NftDropItem key={item.metadata.id.toString()} item={item} />
+              <NftDropItem
+                key={item.metadata.id.toString()}
+                item={item}
+                isClaimed
+              />
             ))}
           </SimpleGrid>
         </Flex>

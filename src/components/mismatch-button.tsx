@@ -11,7 +11,6 @@ export const MismatchButton = React.forwardRef<HTMLButtonElement, ButtonProps>(
         isDisabled={!networksMismatch}
         label="To do this please switch yout wallet network."
         hasArrow
-        // shouldWrapChildren
       >
         <Button
           w="full"

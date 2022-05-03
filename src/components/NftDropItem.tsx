@@ -17,8 +17,8 @@ const ChakraThirdwebNftMedia = chakra(ThirdwebNftMedia);
 
 export const NftDropItem: React.FC<{
   item: NFTMetadataOwner;
-  canBeClaimed?: true;
-}> = ({ item, canBeClaimed }) => {
+  isClaimed?: true;
+}> = ({ item, isClaimed }) => {
   const params = useParams();
   const drop = useNFTDrop(params.dropAddress);
 
@@ -51,24 +51,16 @@ export const NftDropItem: React.FC<{
       <Text fontSize="sm" noOfLines={3}>
         {item.metadata.description}
       </Text>
-      <Divider mt="auto" />
-      {canBeClaimed ? (
-        <ButtonGroup w="full" colorScheme="brand" size="sm">
-          {/* <Button variant="ghost">Transfer</Button> */}
-          <Button
-            onClick={() => claim.mutate()}
-            isLoading={claim.isLoading}
-            flexGrow={1}
-          >
-            Claim
-          </Button>
-        </ButtonGroup>
-      ) : (
-        <ButtonGroup w="full" colorScheme="brand" size="sm">
-          <Button variant="ghost">Transfer</Button>
-          <Button flexGrow={1}>Sell</Button>
-        </ButtonGroup>
-      )}
+
+      {isClaimed ? (
+        <>
+          <Divider mt="auto" />
+          <ButtonGroup w="full" colorScheme="brand" size="sm">
+            <Button variant="ghost">Transfer</Button>
+            <Button flexGrow={1}>Sell</Button>
+          </ButtonGroup>
+        </>
+      ) : undefined}
     </Flex>
   );
 };
