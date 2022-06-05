@@ -4,7 +4,7 @@ This project demonstrates how to deploy and use [NFT Drop](https://portal.thirdw
 
 The NFT Drop contract gives you a distribution mechanism for your 1-of-1 NFTs.
 
-**Check out the Demo here**: [https://nft-drop-vite-ts.vercel.app/](https://nft-drop-vite-ts.vercel.app/)
+**Check out the Demo here**: [https://nft-drop-vite-ts.thirdweb-example.com/](https://nft-drop-vite-ts.thirdweb-example.com)
 
 ![drop-details-1](img/drop-details-1.png)
 
