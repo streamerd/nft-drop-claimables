@@ -24,23 +24,10 @@ You can browse and edit the code directly in this [Code sandbox](https://codesan
 
 ### Local setup
 
-- Install the required dependencies:
-
+Create a project using this example by running:
+```bash
+npx create-tw-app --example nft-drop-vite-ts
 ```
-npm install
-# or
-yarn install
-```
-
-- Run the development server:
-
-```
-npm run dev
-# or
-yarn dev
-```
-
-- Visit [http://localhost:3000/](http://localhost:3000/) to see the result.
 
 # Guide
 
